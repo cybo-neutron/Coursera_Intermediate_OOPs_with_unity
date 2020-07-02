@@ -7,12 +7,14 @@ public class Paddle : MonoBehaviour
 
     Rigidbody2D rb;
     float paddleWidth;
+    float halfHeight;
     const float BounceAngleHalfRange=60;
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         paddleWidth = GetComponent<BoxCollider2D>().size.x / 2;
+        halfHeight = GetComponent<BoxCollider2D>().size.y / 2;
         Debug.Log(paddleWidth);
         Debug.Log(ScreenUtils.ScreenLeft);
         Debug.Log(ScreenUtils.ScreenRight);
@@ -55,8 +57,10 @@ public class Paddle : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D coll)
     {
-        if (coll.gameObject.CompareTag("Ball"))
+        bool topcol = collisionTop(coll);
+        if (coll.gameObject.CompareTag("Ball") && topcol )
         {
+            Debug.Log("top collision");
             // calculate new ball direction
             float ballOffsetFromPaddleCenter = transform.position.x -
                 coll.transform.position.x;
@@ -70,6 +74,22 @@ public class Paddle : MonoBehaviour
             Ball ballScript = coll.gameObject.GetComponent<Ball>();
             ballScript.SetDirection(direction);
         }
+    }
+
+    bool collisionTop(Collision2D coll)
+    {
+
+      
+        float collisionY = coll.GetContact(0).point.y;
+        float top = transform.position.y + halfHeight;
+        Debug.Log(collisionY + " " + top);
+        if(collisionY<=top+0.15f && collisionY>=top-0.15f)
+        {
+            return true;
+        }
+
+
+        return false;
     }
 
 }

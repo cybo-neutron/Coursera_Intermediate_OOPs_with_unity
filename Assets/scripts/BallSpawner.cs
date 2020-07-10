@@ -30,10 +30,11 @@ public class BallSpawner : MonoBehaviour
     }
     public void SpawnBall()
     {
-        if (Physics2D.OverlapArea(spawnLocationMin, spawnLocationMax)==null && ConfigurationUtils.ballsLeft>0)
+        if (Physics2D.OverlapArea(spawnLocationMin, spawnLocationMax)==null && UIManager.balls>0)
         {
 
             Instantiate(ball, spawnPoint.position, Quaternion.identity);
+            UIManager.balls--;
             //Instantiate(ball);
 
             retry = false;     

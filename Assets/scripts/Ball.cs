@@ -14,6 +14,8 @@ public class Ball : MonoBehaviour
     bool ballForced;
 
 
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -47,16 +49,16 @@ public class Ball : MonoBehaviour
         {   
             SpawnBall();
             print("Timer finished");
-            ConfigurationUtils.ballsLeft--;
+            
             Destroy(this.gameObject);
         }
 
         if(transform.position.y<ScreenUtils.ScreenBottom)
         {
             //Debug.Log("Ball went down");
-            ConfigurationUtils.ballsLeft--;
+            
             SpawnBall();
-            Destroy(this.gameObject,0.5f);
+            Destroy(this.gameObject);
         }
 
         
@@ -64,6 +66,7 @@ public class Ball : MonoBehaviour
 
     void SpawnBall()
     {
+        
         ballSpawner.SpawnBall();
     }
 

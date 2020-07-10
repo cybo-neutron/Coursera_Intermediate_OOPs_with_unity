@@ -23,6 +23,58 @@ public static class ConfigurationUtils
         get { return configData.BallImpulseForce; }
     }
 
+    public static float BallTimer
+    {
+        get { return configData.BallTimer; }
+    }
+
+    public static float minBallSpawnTime
+    {
+        get { return ConfigurationData.minBallSpawnTime; }
+    }
+
+    public static float maxBallSpawnTime
+    {
+        get { return ConfigurationData.maxBallSpawnTime; }
+    }
+
+    public static float blockPoints
+    {
+        get { return ConfigurationData.blockPoints; }
+    }
+
+    public static float bonusBlockPoints
+    {
+        get { return ConfigurationData.bonusBlockPoints; }
+    }
+
+    public static float pickupBlockPoints
+    {
+        get { return ConfigurationData.pickupBlockPoints; }
+    }
+
+    public static float standardBlockProbability
+    {
+        get { return ConfigurationData.standardBlockProbability; }
+    }
+
+    public static float bonusBlockProbability
+    {
+        get { return ConfigurationData.bonusBlockProbability; }
+    }
+
+    public static float pickupBlockProbability
+    {
+        get { return ConfigurationData.pickupBlockProbability; }
+    }
+    public static int ballsLeft
+    {
+        get { return ConfigurationData.ballsLeft; }
+
+        set { ConfigurationUtils.ballsLeft = value; }
+    }
+
+
     public static ConfigurationData configData;
 
     #endregion

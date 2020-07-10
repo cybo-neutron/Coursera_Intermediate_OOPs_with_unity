@@ -60,7 +60,7 @@ public class Paddle : MonoBehaviour
         bool topcol = collisionTop(coll);
         if (coll.gameObject.CompareTag("Ball") && topcol )
         {
-            Debug.Log("top collision");
+            //Debug.Log("top collision");
             // calculate new ball direction
             float ballOffsetFromPaddleCenter = transform.position.x -
                 coll.transform.position.x;
@@ -82,7 +82,7 @@ public class Paddle : MonoBehaviour
       
         float collisionY = coll.GetContact(0).point.y;
         float top = transform.position.y + halfHeight;
-        Debug.Log(collisionY + " " + top);
+     
         if(collisionY<=top+0.15f && collisionY>=top-0.15f)
         {
             return true;

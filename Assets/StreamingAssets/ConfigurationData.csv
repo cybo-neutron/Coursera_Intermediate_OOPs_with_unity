@@ -1,1 +1,2 @@
-10,500
+PaddleMoveUnitsPerSecond,BallImpulseForce,BallLifeTime,BallminSpawnTime,BallmaxSpawnTime,Blockpoints,BonusBlockPoints,PickUp Block points,standardBlockProbab,bonusBlockProbab,pickupBlockProbab,ballsleft
+10,200,5,5,10,5,10,6,0.5,0.3,0.2,5

@@ -6,21 +6,65 @@ public class Ball : MonoBehaviour
 {
 
     Rigidbody2D rb;
+    Timer timer;
+
+    float timeBeforeForce;
+
+    BallSpawner ballSpawner;
+    bool ballForced;
+
 
     // Start is called before the first frame update
     void Start()
     {
-        float angle = 20;
-        //Vector2 dir = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)).normalized;
-        Vector2 newDir = new Vector2(0, 1);
         rb = GetComponent<Rigidbody2D>();
-        rb.AddForce(newDir*ConfigurationUtils.BallImpulseForce*Time.fixedDeltaTime, ForceMode2D.Impulse);
+
+        timer = GetComponent<Timer>();
+        
+        ballSpawner = Camera.main.GetComponent<BallSpawner>();
+
+        ballForced = false;
+
+
+        timer.Run();
+
+        timeBeforeForce = Time.time+1;
     }
 
     // Update is called once per frame
+
+    private void FixedUpdate()
+    {
+        if (Time.time > timeBeforeForce && !ballForced)
+        {
+            forceBall();
+            ballForced = true;
+        }
+    }
     void Update()
     {
+        if(timer.Finished)
+        {   
+            SpawnBall();
+            print("Timer finished");
+            ConfigurationUtils.ballsLeft--;
+            Destroy(this.gameObject);
+        }
+
+        if(transform.position.y<ScreenUtils.ScreenBottom)
+        {
+            //Debug.Log("Ball went down");
+            ConfigurationUtils.ballsLeft--;
+            SpawnBall();
+            Destroy(this.gameObject,0.5f);
+        }
+
         
+    }
+
+    void SpawnBall()
+    {
+        ballSpawner.SpawnBall();
     }
 
     public void SetDirection(Vector2 direction)
@@ -32,4 +76,15 @@ public class Ball : MonoBehaviour
 
 
     }
+
+    void forceBall()
+    {
+        float angle = 60;
+
+        Vector2 newDir = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)).normalized;
+
+        rb.AddForce(newDir * ConfigurationUtils.BallImpulseForce * Time.fixedDeltaTime, ForceMode2D.Impulse);
+    }
+
+
 }

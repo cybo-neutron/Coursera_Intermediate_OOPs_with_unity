@@ -27,6 +27,7 @@ public class Ball : MonoBehaviour
 
         ballForced = false;
 
+        timer.totalTime = ConfigurationUtils.BallTimer;
 
         timer.Run();
 
@@ -48,7 +49,7 @@ public class Ball : MonoBehaviour
         if(timer.Finished)
         {   
             SpawnBall();
-            print("Timer finished");
+     
             
             Destroy(this.gameObject);
         }

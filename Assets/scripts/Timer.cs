@@ -8,8 +8,8 @@ public class Timer : MonoBehaviour
     bool running;
     bool started;
     
-     float totalTime;
-    float elapsedTime;
+    [SerializeField]public float totalTime;
+    [SerializeField]float elapsedTime;
 
     private void Start()
     {
@@ -48,8 +48,11 @@ public class Timer : MonoBehaviour
 
     public void Run()
     {
-        if(totalTime>0)
+        print("run");
+        print(totalTime);
+        if(totalTime>0f)
         {
+            print("Running");
             running = true;
             started = true;
             elapsedTime = 0f;

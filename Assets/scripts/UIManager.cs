@@ -35,6 +35,6 @@ public class UIManager: MonoBehaviour
     {
         
         score += s;
-        Debug.Log("Score: "+s);
+   
     }
 }

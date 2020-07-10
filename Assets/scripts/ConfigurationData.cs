@@ -16,7 +16,7 @@ public class ConfigurationData
     // configuration data
     static float paddleMoveUnitsPerSecond = 10;
     static float ballImpulseForce = 200;
-    static float ballTimer;
+    public static  float ballTimer;
     public static float minBallSpawnTime, maxBallSpawnTime;
     public static float blockPoints;
     public static float bonusBlockPoints;

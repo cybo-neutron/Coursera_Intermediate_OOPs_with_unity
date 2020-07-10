@@ -28,13 +28,13 @@ public class LevelBuilder : MonoBehaviour
         float di = boxW + xgap;
         boxinrow = (int)(screenWidth / di);
 
-        Debug.Log("ScreenWidth: " + screenWidth);
-        Debug.Log("boxes: " + boxinrow);
-        Debug.Log("di: " + di);
-        Debug.Log("xgap: " + xgap);
-        Debug.Log("ScreenLeft: " + ScreenUtils.ScreenLeft);
-        Debug.Log("ScreenRight: " + ScreenUtils.ScreenRight);
-        Debug.Log("boxW: " + boxW);
+        //Debug.Log("ScreenWidth: " + screenWidth);
+        //Debug.Log("boxes: " + boxinrow);
+        //Debug.Log("di: " + di);
+        //Debug.Log("xgap: " + xgap);
+        //Debug.Log("ScreenLeft: " + ScreenUtils.ScreenLeft);
+        //Debug.Log("ScreenRight: " + ScreenUtils.ScreenRight);
+        //Debug.Log("boxW: " + boxW);
 
 
 

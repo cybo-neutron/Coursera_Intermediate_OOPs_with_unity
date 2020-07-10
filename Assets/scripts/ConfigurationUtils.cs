@@ -25,7 +25,11 @@ public static class ConfigurationUtils
 
     public static float BallTimer
     {
-        get { return configData.BallTimer; }
+        get
+        {
+            //return configData.BallTimer;
+            return ConfigurationData.ballTimer;
+        }
     }
 
     public static float minBallSpawnTime

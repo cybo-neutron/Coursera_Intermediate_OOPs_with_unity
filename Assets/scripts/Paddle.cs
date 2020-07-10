@@ -15,9 +15,7 @@ public class Paddle : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         paddleWidth = GetComponent<BoxCollider2D>().size.x / 2;
         halfHeight = GetComponent<BoxCollider2D>().size.y / 2;
-        Debug.Log(paddleWidth);
-        Debug.Log(ScreenUtils.ScreenLeft);
-        Debug.Log(ScreenUtils.ScreenRight);
+        
         
     }
 

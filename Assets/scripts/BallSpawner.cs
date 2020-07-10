@@ -21,7 +21,8 @@ public class BallSpawner : MonoBehaviour
         spawnLocationMin = new Vector2(spawnPoint.position.x - 2*colliderWidth, spawnPoint.position.y - 2*colliderHeight);
         spawnLocationMin = new Vector2(spawnPoint.position.x + 2*colliderWidth, spawnPoint.position.y + 2*colliderHeight);
         retry = true;
-        nextSpawnTime = Random.Range(ConfigurationUtils.minBallSpawnTime, ConfigurationUtils.maxBallSpawnTime);
+        //nextSpawnTime = Random.Range(ConfigurationUtils.minBallSpawnTime, ConfigurationUtils.maxBallSpawnTime);
+        nextSpawnTime = Time.time;
         SpawnBall();
 
         elapsedTime = 0;
@@ -58,10 +59,8 @@ public class BallSpawner : MonoBehaviour
             nextSpawnTime=Time.time + Random.Range(ConfigurationUtils.minBallSpawnTime, ConfigurationUtils.maxBallSpawnTime);
             SpawnBall();
         }
+        
 
-
-        elapsedTime = elapsedTime + Time.deltaTime;
-        print(elapsedTime);
     }
 
 }

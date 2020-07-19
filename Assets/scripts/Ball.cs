@@ -13,8 +13,9 @@ public class Ball : MonoBehaviour
     BallSpawner ballSpawner;
     bool ballForced;
 
-
-
+    myTimer speedupTimer;
+    float speedMultiplier;      //when pickupblock triggers speedupEvent speedupMultiplier=2 else speedupMultiplier=1
+    bool speedupReset;
 
     // Start is called before the first frame update
     void Start()
@@ -32,6 +33,11 @@ public class Ball : MonoBehaviour
         timer.Run();
 
         timeBeforeForce = Time.time+1;
+        speedupTimer = GetComponent<myTimer>();
+        speedMultiplier = 1;
+
+        pickupBlock.speedEvent += setSpeedEffect;
+        speedupReset = true;
     }
 
     // Update is called once per frame
@@ -61,8 +67,13 @@ public class Ball : MonoBehaviour
             SpawnBall();
             Destroy(this.gameObject);
         }
-
-        
+        if (!speedupTimer.isRunning() && !speedupReset)
+        {
+            rb.velocity /= speedMultiplier;
+            speedupReset = true;
+        }
+            
+        //print(rb.velocity.magnitude);
     }
 
     void SpawnBall()
@@ -74,10 +85,10 @@ public class Ball : MonoBehaviour
     public void SetDirection(Vector2 direction)
     {
         float ballImpulse = ConfigurationUtils.BallImpulseForce;
-        rb.velocity = new Vector2(direction.x * ballImpulse*Time.fixedDeltaTime, direction.y * ballImpulse*Time.fixedDeltaTime);
+        rb.velocity = new Vector2(direction.x * ballImpulse*Time.fixedDeltaTime, direction.y * ballImpulse*Time.fixedDeltaTime)*speedMultiplier;
         //float ballVelocityVector = Mathf.Sqrt(Mathf.Pow(rb.velocity.x, 2) + Mathf.Pow(rb.velocity.y, 2));
         //rb.velocity = new Vector2(direction.x * ballVelocityVector, direction.y * ballVelocityVector);
-
+        
 
     }
 
@@ -90,5 +101,24 @@ public class Ball : MonoBehaviour
         rb.AddForce(newDir * ConfigurationUtils.BallImpulseForce * Time.fixedDeltaTime, ForceMode2D.Impulse);
     }
 
+
+    public void setSpeedEffect(float speedX,float speedTime)
+    {
+        if(!speedupTimer.isRunning())
+        {
+            speedMultiplier = speedX;
+            rb.velocity *= speedX;
+            speedupTimer.Run(speedTime);
+            print("speeedup"  + speedX.ToString());
+            speedupReset = false;
+
+        }
+    }
+
+    private void OnDisable()
+    {
+        pickupBlock.speedEvent -= setSpeedEffect; 
+        
+    }
 
 }

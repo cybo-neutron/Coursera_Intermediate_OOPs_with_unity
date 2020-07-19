@@ -9,13 +9,18 @@ public class Paddle : MonoBehaviour
     float paddleWidth;
     float halfHeight;
     const float BounceAngleHalfRange=60;
+    public static bool freezeEffectOn;
+    myTimer timer;
+    
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         paddleWidth = GetComponent<BoxCollider2D>().size.x / 2;
         halfHeight = GetComponent<BoxCollider2D>().size.y / 2;
-        
+        freezeEffectOn = false;
+        timer = GetComponent<myTimer>();
+        pickupBlock.freezeEvent += setFreezeEffect;
         
     }
 
@@ -35,6 +40,7 @@ public class Paddle : MonoBehaviour
         //rb.MovePosition(new Vector2(calculateClampedX(newPos.x),newPos.y));
         newPos.x = calculateClampedX(newPos.x);
         //Debug.Log(newPos.x);
+        if(!timer.isRunning())
         rb.MovePosition(newPos);
     }
 
@@ -88,6 +94,12 @@ public class Paddle : MonoBehaviour
 
 
         return false;
+    }
+
+    public void setFreezeEffect(float fTime)
+    {
+        Debug.Log("Freeze effect");
+        timer.Run(fTime);
     }
 
 }

@@ -48,11 +48,11 @@ public class Timer : MonoBehaviour
 
     public void Run()
     {
-        print("run");
+        //print("run");
         print(totalTime);
         if(totalTime>0f)
         {
-            print("Running");
+            //print("Running");
             running = true;
             started = true;
             elapsedTime = 0f;
@@ -69,6 +69,16 @@ public class Timer : MonoBehaviour
                 running = false;
             }
         }
+    }
+
+    public void setTotalTime(float t)
+    {
+        totalTime = t;
+    }
+
+    public void updateTotalTime(float t)
+    {
+        totalTime += t;
     }
 
 }

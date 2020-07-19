@@ -78,6 +78,23 @@ public static class ConfigurationUtils
         set { ConfigurationUtils.ballsLeft = value; }
     }
 
+    public static float freezerTime
+    {
+        get { return ConfigurationData.freezerTime; }
+    }
+
+    public static float speedX
+    {
+        get { return ConfigurationData.speedX; }
+    }
+
+    public static float speedupTime
+    {
+        get
+        {
+            return ConfigurationData.speedupTime;
+        }
+    }
 
     public static ConfigurationData configData;
 

@@ -23,6 +23,9 @@ public class ConfigurationData
     public static float pickupBlockPoints;
     public static float standardBlockProbability, bonusBlockProbability, pickupBlockProbability;
     public static int ballsLeft;
+    public static float freezeTime;
+    public static float speedX;
+    public static float speedupTime;
     #endregion
 
     #region Properties
@@ -101,6 +104,9 @@ public class ConfigurationData
         bonusBlockProbability = float.Parse(values[9]);
         pickupBlockProbability = float.Parse(values[10]);
         ballsLeft = int.Parse(values[11]);
+        freezeTime = float.Parse(values[12]);
+        speedX = float.Parse(values[13]);
+        speedupTime=float.Parse(values[14]);
 
 
 

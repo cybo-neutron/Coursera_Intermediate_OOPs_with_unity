@@ -10,12 +10,16 @@ public class Paddle : MonoBehaviour
     float halfHeight;
     const float BounceAngleHalfRange=60;
     // Start is called before the first frame update
+    myTimer freezeTimer;
+    
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         paddleWidth = GetComponent<BoxCollider2D>().size.x / 2;
         halfHeight = GetComponent<BoxCollider2D>().size.y / 2;
-        
+
+        EventManager.addFreezeListener(freezeEffect);
+        freezeTimer = GetComponent<myTimer>();
         
     }
 
@@ -35,7 +39,8 @@ public class Paddle : MonoBehaviour
         //rb.MovePosition(new Vector2(calculateClampedX(newPos.x),newPos.y));
         newPos.x = calculateClampedX(newPos.x);
         //Debug.Log(newPos.x);
-        rb.MovePosition(newPos);
+        if(!freezeTimer.isRunning())
+            rb.MovePosition(newPos);
     }
 
     Vector2 getPositon()
@@ -90,4 +95,9 @@ public class Paddle : MonoBehaviour
         return false;
     }
 
+
+    public void freezeEffect(float time)
+    {
+        freezeTimer.Run(time);
+    }
 }

@@ -1,12 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class pickupBlock : blocks
 {
     [SerializeField] SpriteRenderer[] sprites;
     pickUpBlockType ballType;
     Dictionary<pickUpBlockType, SpriteRenderer> d = new Dictionary<pickUpBlockType, SpriteRenderer>();
+    freezeEffect freezeEvent = new freezeEffect();
+    speedupEffect speedupEvent = new speedupEffect();
+
     protected override void Start()
     {
         base.Start();
@@ -25,6 +29,16 @@ public class pickupBlock : blocks
         SpriteRenderer sp = gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>();
 
         sp.color = d[ballType].color;
+        switch(ballType)
+        {
+            case pickUpBlockType.freeze:
+                EventManager.addFreezeInvoker(this);
+                break;
+            case pickUpBlockType.speedup:
+                EventManager.addspeedupInvoker(this);
+                break; 
+        }
+        
 
     }
 
@@ -36,8 +50,27 @@ public class pickupBlock : blocks
             //Debug.Log(ballType);
             UIManager.addScore(blockPoints);
             Destroy(this.gameObject);
+
+            switch(ballType)
+            {
+                case pickUpBlockType.freeze:
+                    freezeEvent.Invoke(ConfigurationUtils.freezeTime);
+                    break;
+                case pickUpBlockType.speedup:
+                    speedupEvent.Invoke(ConfigurationUtils.speedupTime, ConfigurationUtils.speedX);
+                    break;
+            }
         }
     }
 
+    public void addlistener(UnityAction<float> listener)
+    {
+        freezeEvent.AddListener(listener);
+    }
+    public void addlistener(UnityAction<float,float> listener)
+    {
+        speedupEvent.AddListener(listener);
+    }
+    
 
 }

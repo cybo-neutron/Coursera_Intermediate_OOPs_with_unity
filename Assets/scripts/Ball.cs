@@ -13,6 +13,9 @@ public class Ball : MonoBehaviour
     BallSpawner ballSpawner;
     bool ballForced;
 
+    bool speedupReset;
+    myTimer speedTimer;
+
 
 
 
@@ -32,6 +35,9 @@ public class Ball : MonoBehaviour
         timer.Run();
 
         timeBeforeForce = Time.time+1;
+
+        EventManager.addspeedupListener(speedupEffect);
+        speedTimer = GetComponent<myTimer>();
     }
 
     // Update is called once per frame
@@ -61,7 +67,11 @@ public class Ball : MonoBehaviour
             SpawnBall();
             Destroy(this.gameObject);
         }
-
+        if(!speedTimer.isRunning() && speedupReset==false)
+        {
+            speedupReset = true;
+            rb.velocity /= 2;
+        }
         
     }
 
@@ -90,5 +100,14 @@ public class Ball : MonoBehaviour
         rb.AddForce(newDir * ConfigurationUtils.BallImpulseForce * Time.fixedDeltaTime, ForceMode2D.Impulse);
     }
 
+    public void speedupEffect(float speedTime,float speedX)
+    {
+        if(!speedTimer.isRunning())
+        {
+            rb.velocity *= speedX;
+            speedupReset = false;
+        }
+        speedTimer.Run(speedTime);
+    }
 
 }
